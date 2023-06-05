@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 logo.setVisibility(View.VISIBLE);
                 forLogin();
             }
-        },4000);
+        },3000);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayShowHomeEnabled(true);
