@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange"
+    android:background="@color/bac_color_1"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -74,11 +74,11 @@
         <Button
             android:id="@+id/button3"
             style="?android:attr/borderlessButtonStyle"
-            android:onClick="toSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:backgroundTint="@android:color/transparent"
+            android:onClick="toSignup"
             android:text="Signup" />
     </TableRow>
 
