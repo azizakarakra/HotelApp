@@ -16,6 +16,7 @@
     <color name="bac_color_1">#F0F0F0</color>
     <color name="bac_color_2">#F8F1F1</color>
     <color name="bac_color_3">#0CFF9800</color>
+    <color name="background_image">#AFAFAF</color>
 
 
 </resources>
