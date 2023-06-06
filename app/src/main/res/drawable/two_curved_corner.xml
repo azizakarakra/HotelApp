@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#70E68330" /> <!-- Set the desired color of the circle -->
+    <solid android:color="@color/orange_alpha_background" /> <!-- Set the desired color of the circle -->
     <corners
         android:topLeftRadius="50dp"
         android:topRightRadius="50dp"

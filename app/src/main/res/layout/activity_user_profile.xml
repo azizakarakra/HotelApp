@@ -91,11 +91,11 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView"
+                android:id="@+id/userImage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/me"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                android:src="@drawable/messi"
+                app:layout_constraintBottom_toTopOf="@+id/userName"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -116,28 +116,58 @@
                 app:layout_constraintGuide_percent="0.8" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Huthayfa Saida"
-                android:textColor="#E68330"
+                android:layout_marginTop="15sp"
+                android:text="Lionel Messi"
+                android:textColor="@color/orange_color_for_text"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView1"
+                app:layout_constraintEnd_toStartOf="@+id/editName"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/userImage" />
+
+            <EditText
+                android:id="@+id/editUserNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Leonal Messi"
+                android:textColor="@color/orange_color_for_text"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/saveName"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/editName"
                 android:layout_width="26sp"
                 android:layout_height="26sp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="15sp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/userName"
+                app:layout_constraintTop_toBottomOf="@+id/userImage"
                 app:srcCompat="@drawable/edit" />
+
+            <ImageView
+                android:id="@+id/saveName"
+                android:layout_width="26sp"
+                android:layout_height="26sp"
+                android:layout_marginTop="15sp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editUserNameText"
+                app:layout_constraintTop_toBottomOf="@+id/userImage"
+                app:srcCompat="@drawable/check"
+                android:visibility="gone"/>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -163,7 +193,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="25sp"
         android:background="@drawable/two_curved_corner"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -181,31 +211,59 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:text="Email"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="30sp"
+                android:text="@string/email_text"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/editEmail"
                 android:layout_width="16sp"
                 android:layout_height="16sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="15sp"
+                android:layout_marginTop="30sp"
                 app:srcCompat="@drawable/edit_black" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:text="hothaifa.saeda@gmail.com"
+            android:layout_marginStart="25sp"
+            android:text="messi@gmail.com"
             android:textColor="#000000"
             android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/editEmailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editEmailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="25sp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="hothaifa.saeda@gmail.com"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/saveEmail"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/check" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -217,31 +275,61 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:text="Password"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="30sp"
+                android:text="@string/password_text"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/editPassword"
                 android:layout_width="16sp"
                 android:layout_height="16sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="15sp"
                 app:srcCompat="@drawable/edit_black" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/passwordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:text="123456789"
+            android:layout_marginStart="25sp"
+            android:text="the best"
             android:textColor="#000000"
             android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/editPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editPasswordText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="25sp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="123456789"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/savePassword"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/check" />
+
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/linearLayout5"
@@ -253,31 +341,60 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:text="Phone Number"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="30sp"
+                android:text="@string/phone_number_text"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/editPhone"
                 android:layout_width="16sp"
                 android:layout_height="16sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="15sp"
                 app:srcCompat="@drawable/edit_black" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/phoneText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:text="0595379390"
+            android:layout_marginStart="25sp"
+            android:text="0599999999"
             android:textColor="#000000"
             android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/editPhoneLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editPhoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="25sp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="0595379390"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/savePhone"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/check" />
+
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/linearLayout6"
@@ -289,34 +406,45 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:text="Date Of Birth"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="30sp"
+                android:text="@string/date_of_birth_text"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/editDateOfBirth"
                 android:layout_width="16sp"
                 android:layout_height="16sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="15sp"
                 app:srcCompat="@drawable/edit_black" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/dateOfBirthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25sp"
+            android:text="24/Jun/1987"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
         <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:id="@+id/editDateOfBirthLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Spinner
                 android:id="@+id/day_spinner"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:layout_marginStart="20sp"
                 android:textColor="#000000"
                 android:textSize="20sp"/>
 
@@ -330,8 +458,9 @@
 
             <Spinner
                 android:id="@+id/month_spinner"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="#000000"
                 android:textSize="20sp"/>
 
@@ -345,10 +474,18 @@
 
             <Spinner
                 android:id="@+id/year_spinner"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="#000000"
                 android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/saveDateOfBirth"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/check" />
 
         </LinearLayout>
 

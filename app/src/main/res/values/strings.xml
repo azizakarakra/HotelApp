@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HotelProject</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="phone_number_text">Phone Number</string>
+    <string name="date_of_birth_text">Date Of Birth</string>
 </resources>
