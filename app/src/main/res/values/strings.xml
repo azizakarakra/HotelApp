@@ -4,4 +4,26 @@
     <string name="password_text">Password</string>
     <string name="phone_number_text">Phone Number</string>
     <string name="date_of_birth_text">Date Of Birth</string>
+    <string name="hotel_name">Hotel HomePal Palestine</string>
+    <string name="free_wifi">Free WiFi</string>
+    <string name="gym">Gym</string>
+    <string name="pool">Pool</string>
+    <string name="parking_available">Parking available</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="property_highlights">Property highlights</string>
+    <string name="description">You can splash around at the seasonal outdoor pool, visit the restaurant for a bite to eat or unwind. Other highlights at this upmarket hotel include a fitness centre. Fellow travellers like that it\'s only a short walk to public transportation.</string>
+    <string name="our_hotel">&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;    Our hotel    &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;</string>
+    <string name="main_advantages">&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;    Main Advantages    &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;</string>
+    <string name="computer_station">- Computer station</string>
+    <string name="business_centre">- Business centre</string>
+    <string name="daily_housekeeping">- Daily housekeeping</string>
+    <string name="breakfast_available">- Breakfast available</string>
+    <string name="restaurants">- Restaurants</string>
+    <string name="room_service">- Room service</string>
+    <string name="_10_meeting_rooms">- 10 meeting rooms</string>
+    <string name="fitness_centre">- Fitness centre</string>
+    <string name="_24_hour_front_desk">- 24-hour front desk</string>
+    <string name="seasonal_outdoor_pool">- Seasonal outdoor pool</string>
+    <string name="rooftop_terrace">- Rooftop terrace</string>
+    <string name="reservation">reservation</string>
 </resources>

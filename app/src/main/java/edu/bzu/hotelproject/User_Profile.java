@@ -18,11 +18,15 @@ import java.util.List;
 
 public class User_Profile extends AppCompatActivity {
 
+    ImageView menu, appLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+
+        menu = (ImageView) findViewById(R.id.menu);
+        appLogo = (ImageView) findViewById(R.id.appLogo);
 
         ImageView editName = (ImageView) findViewById(R.id.editName);
         ImageView editEmail = (ImageView) findViewById(R.id.editEmail);
@@ -55,6 +59,15 @@ public class User_Profile extends AppCompatActivity {
         LinearLayout editPasswordLayout = (LinearLayout) findViewById(R.id.editPasswordLayout);
         LinearLayout editPhoneLayout = (LinearLayout) findViewById(R.id.editPhoneLayout);
         LinearLayout editDateOfBirthLayout = (LinearLayout) findViewById(R.id.editDateOfBirthLayout);
+
+        appLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(User_Profile.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         editName.setOnClickListener(new View.OnClickListener() {
             @Override
