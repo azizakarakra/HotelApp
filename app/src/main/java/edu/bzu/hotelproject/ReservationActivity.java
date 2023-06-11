@@ -24,7 +24,7 @@ public class ReservationActivity extends AppCompatActivity {
     ImageView menu, appLogo;
 
     private DatePickerDialog datePickerDialogStart, datePickerDialogEnd;
-    private Button checkInDatePickerButton, checkOutDatePickerButton;
+    private Button checkInDatePickerButton, checkOutDatePickerButton, selectRoomsButton;
 
     private Button showPopup;
 
@@ -34,7 +34,6 @@ public class ReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservation);
 
         appLogo = (ImageView) findViewById(R.id.appLogo);
-
         appLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,7 +199,16 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
 
+        selectRoomsButton = (Button) findViewById(R.id.selectRoomsButton);
 
+        selectRoomsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ReservationActivity.this, SelectRoomsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private String getTodaysDate() {
