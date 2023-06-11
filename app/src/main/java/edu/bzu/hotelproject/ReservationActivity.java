@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -24,10 +23,10 @@ public class ReservationActivity extends AppCompatActivity {
 
     ImageView menu, appLogo;
 
-    private DatePickerDialog datePickerDialog;
-    private Button checkInDatePickerButton;
+    private DatePickerDialog datePickerDialogStart, datePickerDialogEnd;
+    private Button checkInDatePickerButton, checkOutDatePickerButton;
 
-    private Button button4;
+    private Button showPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +44,27 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
 
-        initDatePicker();
+        initDatePickers();
         checkInDatePickerButton = findViewById(R.id.checkInDatePickerButton);
         checkInDatePickerButton.setText(getTodaysDate());
+        checkOutDatePickerButton = findViewById(R.id.checkOutDatePickerButton);
+        checkOutDatePickerButton.setText(getTodaysDate());
 
-        button4 = findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener() {
+        checkInDatePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openStartDatePicker(view);
+            }
+        });
+        checkOutDatePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openEndDatePicker(view);
+            }
+        });
+
+        showPopup = findViewById(R.id.showPopup);
+        showPopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -60,43 +74,47 @@ public class ReservationActivity extends AppCompatActivity {
                 Button addFloorNumber = viewPopupwindow.findViewById(R.id.addFloorNumber);
                 Button subFloorNumber = viewPopupwindow.findViewById(R.id.subFloorNumber);
                 TextView floorNumber = viewPopupwindow.findViewById(R.id.floorNumber);
-
-                // Set click listeners for the buttons
-                addFloorNumber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int number = Integer.parseInt(floorNumber.getText().toString());
-                        if (number < 30) {
-                            number++;
-                            floorNumber.setText(String.valueOf(number));
-                        }
-                    }
-                });
-
-                subFloorNumber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int number = Integer.parseInt(floorNumber.getText().toString());
-                        if (number > 0) {
-                            number--;
-                            floorNumber.setText(String.valueOf(number));
-                        }
-                    }
-                });
-
-                // Find views within the popup layout
                 Button addRoomsNumber = viewPopupwindow.findViewById(R.id.addRoomsNumber);
                 Button subRoomsNumber = viewPopupwindow.findViewById(R.id.subRoomsNumber);
                 TextView roomsNumber = viewPopupwindow.findViewById(R.id.roomsNumber);
+                Button addAdultsNumber = viewPopupwindow.findViewById(R.id.addAdultsNumber);
+                Button subAdultsNumber = viewPopupwindow.findViewById(R.id.subAdultsNumber);
+                TextView adultsNumber = viewPopupwindow.findViewById(R.id.adultsNumber);
+                Button addChildrenNumber = viewPopupwindow.findViewById(R.id.addChildrenNumber);
+                Button subChildrenNumber = viewPopupwindow.findViewById(R.id.subChildrenNumber);
+                TextView childrenNumber = viewPopupwindow.findViewById(R.id.childrenNumber);
+                Button apply = viewPopupwindow.findViewById(R.id.apply);
+                Button cancel = viewPopupwindow.findViewById(R.id.cancel);
+                ConstraintLayout constraintLayout = viewPopupwindow.findViewById(R.id.root);
 
-                // Set click listeners for the buttons
+                addFloorNumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int floorNum = Integer.parseInt(floorNumber.getText().toString());
+                        if (floorNum < 10) {
+                            floorNum++;
+                            floorNumber.setText(String.valueOf(floorNum));
+                        }
+                    }
+                });
+                subFloorNumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int floorNum = Integer.parseInt(floorNumber.getText().toString());
+                        if (floorNum > 0) {
+                            floorNum--;
+                            floorNumber.setText(String.valueOf(floorNum));
+                        }
+                    }
+                });
+
                 addRoomsNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(roomsNumber.getText().toString());
-                        if (number < 30) {
-                            number++;
-                            roomsNumber.setText(String.valueOf(number));
+                        int roomNum = Integer.parseInt(roomsNumber.getText().toString());
+                        if (roomNum < 30) {
+                            roomNum++;
+                            roomsNumber.setText(String.valueOf(roomNum));
                         }
                     }
                 });
@@ -104,27 +122,21 @@ public class ReservationActivity extends AppCompatActivity {
                 subRoomsNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(roomsNumber.getText().toString());
-                        if (number > 0) {
-                            number--;
-                            roomsNumber.setText(String.valueOf(number));
+                        int roomNum = Integer.parseInt(roomsNumber.getText().toString());
+                        if (roomNum > 0) {
+                            roomNum--;
+                            roomsNumber.setText(String.valueOf(roomNum));
                         }
                     }
                 });
 
-                // Find views within the popup layout
-                Button addAdultsNumber = viewPopupwindow.findViewById(R.id.addAdultsNumber);
-                Button subAdultsNumber = viewPopupwindow.findViewById(R.id.subAdultsNumber);
-                TextView adultsNumber = viewPopupwindow.findViewById(R.id.adultsNumber);
-
-                // Set click listeners for the buttons
                 addAdultsNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(adultsNumber.getText().toString());
-                        if (number < 30) {
-                            number++;
-                            adultsNumber.setText(String.valueOf(number));
+                        int n = Integer.parseInt(adultsNumber.getText().toString());
+                        if (n < 30) {
+                            n++;
+                            adultsNumber.setText(String.valueOf(n));
                         }
                     }
                 });
@@ -132,27 +144,21 @@ public class ReservationActivity extends AppCompatActivity {
                 subAdultsNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(adultsNumber.getText().toString());
-                        if (number > 0) {
-                            number--;
-                            adultsNumber.setText(String.valueOf(number));
+                        int n = Integer.parseInt(adultsNumber.getText().toString());
+                        if (n > 0) {
+                            n--;
+                            adultsNumber.setText(String.valueOf(n));
                         }
                     }
                 });
 
-                // Find views within the popup layout
-                Button addChildrenNumber = viewPopupwindow.findViewById(R.id.addChildrenNumber);
-                Button subChildrenNumber = viewPopupwindow.findViewById(R.id.subChildrenNumber);
-                TextView childrenNumber = viewPopupwindow.findViewById(R.id.childrenNumber);
-
-                // Set click listeners for the buttons
                 addChildrenNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(childrenNumber.getText().toString());
-                        if (number < 30) {
-                            number++;
-                            childrenNumber.setText(String.valueOf(number));
+                        int n = Integer.parseInt(childrenNumber.getText().toString());
+                        if (n < 30) {
+                            n++;
+                            childrenNumber.setText(String.valueOf(n));
                         }
                     }
                 });
@@ -160,18 +166,13 @@ public class ReservationActivity extends AppCompatActivity {
                 subChildrenNumber.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int number = Integer.parseInt(childrenNumber.getText().toString());
-                        if (number > 0) {
-                            number--;
-                            childrenNumber.setText(String.valueOf(number));
+                        int n = Integer.parseInt(childrenNumber.getText().toString());
+                        if (n > 0) {
+                            n--;
+                            childrenNumber.setText(String.valueOf(n));
                         }
                     }
                 });
-
-                // Find views within the popup layout
-                Button apply = viewPopupwindow.findViewById(R.id.apply);
-                Button cancel = viewPopupwindow.findViewById(R.id.cancel);
-                ConstraintLayout constraintLayout = viewPopupwindow.findViewById(R.id.root);
 
                 PopupWindow popupWindow = new PopupWindow(viewPopupwindow,
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
@@ -185,6 +186,7 @@ public class ReservationActivity extends AppCompatActivity {
                         int selectedadultsNumber = Integer.parseInt(adultsNumber.getText().toString());
                         int selectedchildrenNumber = Integer.parseInt(childrenNumber.getText().toString());
                         // Do something with the selected number
+                        showPopup.setText("floor "+selectedNumber+", "+selectedroomsNumber+" rooms, "+selectedadultsNumber+" adults, "+selectedchildrenNumber+" children");
                         popupWindow.dismiss();
                     }
                 });
@@ -201,26 +203,27 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
-    private String getTodaysDate()
-    {
+    private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
-        month = month + 1;
+        month += 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day, month, year);
     }
 
-    private void initDatePicker()
-    {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
-        {
+    private void initDatePickers() {
+        initStartDatePicker();
+        initEndDatePicker();
+    }
+
+    private void initStartDatePicker() {
+        DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day)
-            {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                checkInDatePickerButton.setText(date);
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                String newDate = makeDateString(day, month, year);
+                checkInDatePickerButton.setText(newDate);
             }
         };
 
@@ -228,52 +231,46 @@ public class ReservationActivity extends AppCompatActivity {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-
         int style = AlertDialog.THEME_HOLO_LIGHT;
-
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
+        datePickerDialogStart = new DatePickerDialog(this, style, startDateSetListener, year, month, day);
     }
 
-    private String makeDateString(int day, int month, int year)
-    {
+    private void initEndDatePicker() {
+        DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                String newDate = makeDateString(day, month, year);
+                checkOutDatePickerButton.setText(newDate);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+        datePickerDialogEnd = new DatePickerDialog(this, style, endDateSetListener, year, month, day);
+    }
+
+    private String makeDateString(int day, int month, int year) {
         return getMonthFormat(month) + " " + day + " " + year;
     }
 
-    private String getMonthFormat(int month)
-    {
-        if(month == 1)
-            return "JAN";
-        if(month == 2)
-            return "FEB";
-        if(month == 3)
-            return "MAR";
-        if(month == 4)
-            return "APR";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUN";
-        if(month == 7)
-            return "JUL";
-        if(month == 8)
-            return "AUG";
-        if(month == 9)
-            return "SEP";
-        if(month == 10)
-            return "OCT";
-        if(month == 11)
-            return "NOV";
-        if(month == 12)
-            return "DEC";
-
-        //default should never happen
-        return "JAN";
+    private String getMonthFormat(int month) {
+        String[] monthsNames = new String[]{"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+        if (month >= 1 && month <= 12) {
+            return monthsNames[month - 1];
+        } else {
+            return "JAN"; // default should never happen
+        }
     }
 
-    public void openDatePicker(View view)
-    {
-        datePickerDialog.show();
+    public void openStartDatePicker(View view) {
+        datePickerDialogStart.show();
+    }
+
+    public void openEndDatePicker(View view) {
+        datePickerDialogEnd.show();
     }
 }
