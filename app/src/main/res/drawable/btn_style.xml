@@ -9,11 +9,11 @@
 
             <!-- Add border radius -->
             <corners
-                android:radius="8dp" />
+                android:radius="5dp" />
 
             <!-- Add background color -->
             <solid
-                android:color="#59DDDDDD" />
+                android:color="@color/bac_color_1" />
         </shape>
     </item>
 </selector>
