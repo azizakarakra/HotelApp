@@ -22,6 +22,7 @@ public class HotelProfile extends AppCompatActivity {
         appLogo = (ImageView) findViewById(R.id.appLogo);
         reservation = (Button)findViewById(R.id.reservation);
 
+
         appLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
