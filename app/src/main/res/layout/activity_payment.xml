@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FillInfoActivity">
+    tools:context=".PaymentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Layout8"
@@ -33,7 +33,7 @@
             android:id="@+id/textView15"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Fill in your info"
+            android:text="Finish booking"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
@@ -126,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="First Name"
+        android:text="Card Holder Name"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
         app:layout_constraintStart_toStartOf="@+id/guideline31" />
 
@@ -151,15 +152,8 @@
             android:ems="9"
             android:inputType="textPersonName"
             android:paddingHorizontal="5dp"
-            android:text="Hamada"
+            android:hint="Enter the name"
             android:textColor="@color/border_color_2" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/checktrue" />
 
     </LinearLayout>
 
@@ -168,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Last Name"
+        android:text="Card Number"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
         app:layout_constraintStart_toStartOf="@+id/guideline31" />
 
@@ -185,21 +179,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline31">
 
         <EditText
+            android:id="@+id/cardNumber"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:ems="9"
-            android:inputType="textPersonName"
+            android:hint="xxxx xxxx xxxx xxxx"
+            android:inputType="number"
             android:paddingHorizontal="5dp"
-            android:text="Assi"
-            android:textColor="@color/border_color_2"/>
+            android:textColor="@color/border_color_2" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/checktrue" />
     </LinearLayout>
 
     <TextView
@@ -207,7 +197,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Email Address"
+        android:text="CVV Code"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
         app:layout_constraintStart_toStartOf="@+id/guideline31" />
 
@@ -230,16 +220,10 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:ems="9"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:paddingHorizontal="5dp"
-            android:text="hamada98assi@gmail.com"
-            android:textColor="@color/border_color_2"/>
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/checktrue" />
+            android:text="000"
+            android:textColor="@color/border_color_2" />
     </LinearLayout>
 
     <TextView
@@ -247,7 +231,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Mobile Phone"
+        android:text="Expiration Date"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
         app:layout_constraintStart_toStartOf="@+id/guideline31" />
 
@@ -263,22 +247,16 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline30"
         app:layout_constraintStart_toStartOf="@+id/guideline31">
 
-        <EditText
+        <Button
+            android:id="@+id/checkDatePickerButton"
+            style="?android:spinnerStyle"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:ems="9"
-            android:inputType="phone"
-            android:paddingHorizontal="5dp"
-            android:text=""
-            android:textColor="@color/border_color_2"/>
+            android:onClick="openDatePicker"
+            android:text="JUN 06 2023"
+            android:textColor="@color/border_color_2"
+            android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/wrong" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -337,6 +315,7 @@
         app:layout_constraintStart_toEndOf="@+id/lastnameText"
         app:layout_constraintTop_toTopOf="@+id/lastnameText"
         app:srcCompat="@drawable/asterisk" />
+
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -346,6 +325,7 @@
         app:layout_constraintStart_toEndOf="@+id/emailText"
         app:layout_constraintTop_toTopOf="@+id/emailText"
         app:srcCompat="@drawable/asterisk" />
+
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -355,4 +335,13 @@
         app:layout_constraintStart_toEndOf="@+id/mobileText"
         app:layout_constraintTop_toTopOf="@+id/mobileText"
         app:srcCompat="@drawable/asterisk" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save card for future booking"
+        app:layout_constraintBottom_toTopOf="@+id/guideline40"
+        app:layout_constraintStart_toStartOf="@+id/guideline31"
+        app:layout_constraintTop_toTopOf="@+id/guideline38" />
 </androidx.constraintlayout.widget.ConstraintLayout>
