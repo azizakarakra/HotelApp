@@ -129,7 +129,7 @@
                     android:text="@string/reservation"
                     android:textAlignment="center"
                     android:textColor="@color/orange_color_2"
-                    android:textScaleX="2"
+                    android:textScaleX="1.2"
                     app:layout_constraintBottom_toTopOf="@+id/guideline15"
                     app:layout_constraintEnd_toStartOf="@+id/guideline8"
                     app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -345,14 +345,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.95" />
+                    app:layout_constraintGuide_percent="0.96" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.75" />
+                    app:layout_constraintGuide_percent="0.76" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -413,7 +413,8 @@
                             android:layout_marginTop="50dp"
                             android:paddingVertical="15dp"
                             android:text="@string/main_advantages"
-                            android:textSize="20sp"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
