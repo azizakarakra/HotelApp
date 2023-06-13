@@ -26,4 +26,7 @@
     <string name="seasonal_outdoor_pool">- Seasonal outdoor pool</string>
     <string name="rooftop_terrace">- Rooftop terrace</string>
     <string name="reservation">reservation</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+
 </resources>
