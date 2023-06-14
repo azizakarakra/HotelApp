@@ -7,23 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-public class FillInfoActivity extends AppCompatActivity {
+public class BookingOverviewActivity extends AppCompatActivity {
 
-    private Button next, cancel;
-    private  ImageView back;
+    private Button finish, cancel;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fill_info);
+        setContentView(R.layout.activity_booking_overview);
 
-        next = (Button) findViewById(R.id.next);
+        finish = (Button) findViewById(R.id.finish);
         cancel = (Button) findViewById(R.id.cancel);
         back = (ImageView) findViewById(R.id.back);
-        next.setOnClickListener(new View.OnClickListener() {
+
+        finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FillInfoActivity.this, PaymentActivity.class);
+                Toast.makeText(BookingOverviewActivity.this, "Your booking is confirmed", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(BookingOverviewActivity.this, HotelProfile.class);
                 startActivity(intent);
                 finish();
             }
@@ -31,7 +34,7 @@ public class FillInfoActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FillInfoActivity.this, SelectRoomsActivity.class);
+                Intent intent = new Intent(BookingOverviewActivity.this, SelectRoomsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -39,7 +42,7 @@ public class FillInfoActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FillInfoActivity.this, SelectRoomsActivity.class);
+                Intent intent = new Intent(BookingOverviewActivity.this, SelectRoomsActivity.class);
                 startActivity(intent);
                 finish();
             }
