@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:ems="10"
-            android:hint="Date Of Birth"
+            android:hint="Enter Your Age"
             android:inputType="date" />
     </TableRow>
 
@@ -66,5 +66,29 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="65dp"
         android:text="Signup" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginLeft="90dp">
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="do you have an account?" />
+
+        <Button
+            android:id="@+id/toLogin"
+            android:onClick="toLogin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Login" />
+
+    </TableRow>
 
 </LinearLayout>
