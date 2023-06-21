@@ -205,4 +205,7 @@ public class AdsActivity extends AppCompatActivity implements NavigationView.OnN
             super.onBackPressed();
         }
     }
+
+    public void toContact(View view) {
+    }
 }

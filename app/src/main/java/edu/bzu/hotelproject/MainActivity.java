@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 logo.setVisibility(View.VISIBLE);
-                forLogin();
+              //  forLogin();
+                forAbout();
+
             }
         },3000);
 
@@ -49,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void forSignup(View view) {
         Intent intent = new Intent(this,SignupActivity.class);
+        startActivity(intent);
+    }
+
+    public void forAbout(){
+        Intent intent = new Intent(this,AboutActivity.class);
         startActivity(intent);
     }
 }
