@@ -13,11 +13,11 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String NAME = "NAME";
+    public static final String EMAIL = "EMAIL";
     public static final String PASS = "PASS";
     public static final String FLAG = "FLAG";
     private boolean flag = false;
-    private EditText edtName;
+    private EditText EmailAddress;
     private EditText edtPassword;
     private CheckBox chk;
     private SharedPreferences prefs;
@@ -32,29 +32,44 @@ public class LoginActivity extends AppCompatActivity {
         checkPrefs();
 
         Button login = (Button) findViewById(R.id.login);
+        Button SignUpButton = (Button) findViewById(R.id.SignUpButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String e = EmailAddress.getText().toString();
+                String password = edtPassword.getText().toString();
+
+                if(chk.isChecked()){
+                    if(!flag) {
+                        editor.putString(EMAIL, e);
+                        editor.putString(PASS, password);
+                        editor.putBoolean(FLAG, true);
+                        editor.commit();
+                    }
+                }
                 Intent intent = new Intent(LoginActivity.this, HotelProfile.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-    }
-
-    public void toSignup(View view) {
-        Intent intent = new Intent(this,SignupActivity.class);
-        startActivity(intent);
+        SignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void checkPrefs() {
         flag = prefs.getBoolean(FLAG, false);
 
         if(flag){
-            String name = prefs.getString(NAME, "");
+            String email = prefs.getString(EMAIL, "");
             String password = prefs.getString(PASS, "");
-            edtName.setText(name);
+            EmailAddress.setText(email);
             edtPassword.setText(password);
             chk.setChecked(true);
         }
@@ -66,24 +81,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        edtName = findViewById(R.id.editTextTextPersonName);
+        EmailAddress = findViewById(R.id.EmailAddress);
         edtPassword = findViewById(R.id.editTextPass);
         chk = findViewById(R.id.checkBox);
-    }
-
-    public void btnLoginOnClick(View view) {
-        String name = edtName.getText().toString();
-        String password = edtPassword.getText().toString();
-
-        if(chk.isChecked()){
-            if(!flag) {
-                editor.putString(NAME, name);
-                editor.putString(PASS, password);
-                editor.putBoolean(FLAG, true);
-                editor.commit();
-            }
-
-        }
-
     }
 }

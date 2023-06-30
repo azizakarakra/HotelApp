@@ -76,7 +76,9 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
     }
 
     public void showGallery(View view) {
-
+        Intent intent = new Intent(SelectRoomsActivity.this, GalleryActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

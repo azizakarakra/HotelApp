@@ -17,6 +17,7 @@ public class AboutActivity extends AppCompatActivity {
     public void btnLogin(View view) {
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void ToSignup(View view) {
