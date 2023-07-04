@@ -5,138 +5,248 @@
     android:id="@+id/Login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AboutActivity">
 
+
     <ImageView
-        android:id="@+id/imageView21"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/border"
+        android:id="@+id/hi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nav_account" />
+        app:srcCompat="@drawable/hello" />
+
+    <ImageView
+        android:id="@+id/welcome"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/welcome" />
+
+    <TextView
+        android:id="@+id/textGuitar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome to our hotel booking app!  Enjoy seamless booking with our user-friendly interface"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline54"
+        app:layout_constraintEnd_toStartOf="@+id/guideline53"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toTopOf="@+id/guideline56" />
+
+    <ImageView
+        android:id="@+id/guitar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/guitar" />
+
+    <TextView
+        android:id="@+id/textLove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Whether you're planning a luxurious getaway, a business trip, or a spontaneous adventure, we've got you covered!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toStartOf="@+id/guideline53"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toTopOf="@+id/guideline56" />
+
+    <ImageView
+        android:id="@+id/love"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/love" />
+
+    <TextView
+        android:id="@+id/textParty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enjoy your journey!"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline54"
+        app:layout_constraintEnd_toStartOf="@+id/guideline53"
+        app:layout_constraintStart_toStartOf="@+id/guideline36" />
 
     <Button
-        android:id="@+id/forlogin"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="91dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@android:color/transparent"
-        android:fontFamily="sans-serif-black"
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_corner"
         android:onClick="btnLogin"
-        android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/imageView22"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
-
-    <ImageView
-        android:id="@+id/imageView22"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forlogin"
-        app:srcCompat="@drawable/user_plus_solid" />
+        android:text="Sign In"
+        android:textColor="@color/orange_color_1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline36"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toTopOf="@+id/guideline57" />
 
     <Button
-        android:id="@+id/forSignup"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="91dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif-black"
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/input_box"
         android:onClick="ToSignup"
-        android:shadowColor="@android:color/transparent"
-        android:text="Signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+        android:text="Sign Up"
+        app:layout_constraintEnd_toStartOf="@+id/guideline53"
+        app:layout_constraintStart_toStartOf="@+id/guideline36"
+        app:layout_constraintTop_toTopOf="@+id/guideline57" />
 
     <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="12dp"
-        android:onClick="toContact"
+        android:id="@+id/party"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forSignup"
-        app:srcCompat="@drawable/square_phone_solid" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/party" />
 
-    <Button
-        android:id="@+id/toContact"
-        android:onClick="toContact1"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="91dp"
-        android:layout_height="39dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif-black"
-        android:text="Contact Us"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
 
-    <ImageView
-        android:id="@+id/imageView29"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toContact"
-        app:srcCompat="@drawable/nav_home" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-    <Button
-        android:id="@+id/toAbout"
-        android:onClick="About"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="91dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif-black"
-        android:text="About Us"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView29" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.69" />
 
-    <ImageView
-        android:id="@+id/imageView30"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toAbout"
-        app:srcCompat="@drawable/square_h_solid" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
-    <Button
-        android:id="@+id/toHotelPage"
-        android:onClick="toHotel"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="170dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif-black"
-        android:text="Continue as a guest"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.21887825" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40355676" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline56"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline57"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.83173734" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bac"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/letsgo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/letsgo" />
+
+        <TextView
+            android:id="@+id/textAngry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Too late !!"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/guideline531"
+            app:layout_constraintStart_toStartOf="@+id/guideline271"
+            app:layout_constraintTop_toTopOf="@+id/guideline561" />
+
+        <ImageView
+            android:id="@+id/angry"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/angry" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline271"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline531"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline561"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

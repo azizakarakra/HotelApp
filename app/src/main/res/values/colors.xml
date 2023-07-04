@@ -21,6 +21,8 @@
     <color name="orange_alpha_background">#70E68330</color>
     <color name="border_color">#ececec</color>
     <color name="border_color_2">#777</color>
+    <color name="red">#F44336</color>
+    <color name="text_color">#A36406</color>
 
 
 </resources>

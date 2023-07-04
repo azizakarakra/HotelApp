@@ -375,6 +375,13 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
                 finish();
                 break;
 
+            case R.id.nav_booking:
+                Toast.makeText(this, "booking!", Toast.LENGTH_SHORT).show();
+                intent = new Intent(User_Profile.this, UserBookingActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, LoginActivity.class);
