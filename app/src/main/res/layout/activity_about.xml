@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/nav_account" />
+
+    <Button
+        android:id="@+id/forlogin"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:fontFamily="sans-serif-black"
+        android:onClick="btnLogin"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/imageView22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forlogin"
+        app:srcCompat="@drawable/user_plus_solid" />
+
+    <Button
+        android:id="@+id/forSignup"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-black"
+        android:onClick="ToSignup"
+        android:shadowColor="@android:color/transparent"
+        android:text="Signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
+        android:onClick="toContact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forSignup"
+        app:srcCompat="@drawable/square_phone_solid" />
+
+    <Button
+        android:id="@+id/toContact"
+        android:onClick="toContact1"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-black"
+        android:text="Contact Us"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toContact"
+        app:srcCompat="@drawable/nav_home" />
+
+    <Button
+        android:id="@+id/toAbout"
+        android:onClick="About"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-black"
+        android:text="About Us"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView29" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toAbout"
+        app:srcCompat="@drawable/square_h_solid" />
+
+    <Button
+        android:id="@+id/toHotelPage"
+        android:onClick="toHotel"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="170dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-black"
+        android:text="Continue as a guest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

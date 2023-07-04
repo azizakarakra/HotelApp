@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         ImageView logo = (ImageView) findViewById(R.id.hotelLogo);
 
 
@@ -32,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 logo.setVisibility(View.VISIBLE);
-                forLogin();
+              //  forLogin();
+                forAbout();
+
             }
         },3000);
 
@@ -49,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void forSignup(View view) {
         Intent intent = new Intent(this,SignupActivity.class);
+        startActivity(intent);
+    }
+
+    public void forAbout(){
+        Intent intent = new Intent(this,AboutActivity.class);
         startActivity(intent);
     }
 }
