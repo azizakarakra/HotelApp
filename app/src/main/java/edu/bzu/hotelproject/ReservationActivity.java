@@ -39,10 +39,18 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
 
     private Button showPopup;
 
+    Intent intent;
+    String username;
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
 //        navbar start code:
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,6 +82,11 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView userName = headerView.findViewById(R.id.userName);
+        userName.setText(username);
+
 //        navbar end code
 
         initDatePickers();
@@ -328,6 +341,8 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         case R.id.nav_home:
             Toast.makeText(this, "home!", Toast.LENGTH_SHORT).show();
             intent = new Intent(ReservationActivity.this, HotelProfile.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email", email);
             startActivity(intent);
             finish();
             break;
@@ -392,6 +407,8 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         case R.id.nav_about:
             Toast.makeText(this, "about!", Toast.LENGTH_SHORT).show();
             intent = new Intent(ReservationActivity.this, AdsActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email", email);
             startActivity(intent);
             finish();
             break;
@@ -399,6 +416,8 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         case R.id.nav_account:
             Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();
             intent = new Intent(ReservationActivity.this, User_Profile.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email", email);
             startActivity(intent);
             finish();
             break;
@@ -406,6 +425,8 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         case R.id.nav_logout:
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
             intent = new Intent(ReservationActivity.this, LoginActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email", email);
             startActivity(intent);
             finish();
             break;

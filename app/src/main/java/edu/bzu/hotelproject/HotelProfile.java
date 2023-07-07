@@ -30,15 +30,25 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HotelProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     Button reservation;
 
+    Intent intent;
+    String username;
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_profile);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,11 +80,20 @@ public class HotelProfile extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView userName = headerView.findViewById(R.id.userName);
+
+
+
+        userName.setText(username);
+
         reservation = (Button)findViewById(R.id.reservation);
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelProfile.this, ReservationActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }
@@ -155,6 +174,8 @@ public class HotelProfile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_about:
                 Toast.makeText(this, "about!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(HotelProfile.this, AdsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -162,6 +183,8 @@ public class HotelProfile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_account:
                 Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(HotelProfile.this, User_Profile.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -169,6 +192,8 @@ public class HotelProfile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(HotelProfile.this, LoginActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;

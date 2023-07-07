@@ -2,7 +2,10 @@ package edu.bzu.hotelproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,12 +29,22 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
+    public static final String EMAIL = "EMAIL";
+    public static final String PASS = "PASS";
+    public static final String USERNAME = "USERNAME";
+    public static final String PHONE = "PHONE";
+    public static final String DATEOFBIRTH = "DATEOFBIRTH";
+
     ProgressBar progressBar;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        setupSharedPrefs();
 
         EditText userName = (EditText) findViewById(R.id.userName);
         EditText email = (EditText) findViewById(R.id.email);
@@ -41,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
 
         Button signUp = (Button) findViewById(R.id.signUp);
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,9 +69,18 @@ public class SignupActivity extends AppCompatActivity {
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
-
+                                editor.putString(EMAIL, email.getText().toString());
+                                editor.putString(PASS, password.getText().toString());
+                                editor.putString(USERNAME, userName.getText().toString());
+                                editor.putString(PHONE, phone.getText().toString());
+                                editor.putString(DATEOFBIRTH, dateOfBirth.getText().toString());
                                 Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-
+                                progressBar.setVisibility(View.GONE);
+                                Intent intent = new Intent(SignupActivity.this, HotelProfile.class);
+                                intent.putExtra("email", email.getText().toString());
+                                intent.putExtra("username", userName.getText().toString());
+                                startActivity(intent);
+                                finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -98,5 +120,9 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void setupSharedPrefs() {
+        prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
     }
 }

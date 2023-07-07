@@ -9,8 +9,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.method.Touch;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,17 +30,83 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User_Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private DrawerLayout drawerLayout;
+
+    ImageView editName ;
+    ImageView editEmail ;
+    ImageView editPassword;
+    ImageView editPhone ;
+    ImageView editDateOfBirth ;
+
+    ImageView saveName;
+    ImageView saveEmail;
+    ImageView savePassword;
+    ImageView savePhone;
+    ImageView saveDateOfBirth;
+
+    TextView userName;
+    TextView emailText;
+    TextView passwordText;
+    TextView phoneText;
+    TextView dateOfBirthText;
+
+    EditText editUserNameText;
+    EditText editEmailText;
+    EditText editPasswordText ;
+    EditText editPhoneText ;
+
+    Spinner day_spinner ;
+    Spinner month_spinner ;
+    Spinner year_spinner ;
+
+    LinearLayout editEmailLayout ;
+    LinearLayout editPasswordLayout;
+    LinearLayout editPhoneLayout;
+    LinearLayout editDateOfBirthLayout ;
+
+    Intent intent;
+    String email;
+
+
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+
+    public static final String EMAIL = "EMAIL";
+    public static final String PASS = "PASS";
+    public static final String USERNAME = "USERNAME";
+    public static final String PHONE = "PHONE";
+    public static final String DATEOFBIRTH = "DATEOFBIRTH";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        intent = getIntent();
+        email = intent.getStringExtra("email");
+
+        setupSharedPrefs();
 
 //        START CODE NAVBAR
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -69,39 +138,79 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.userName);
+
+
 //        END CODE NAVBAR
 
-        ImageView editName = (ImageView) findViewById(R.id.editName);
-        ImageView editEmail = (ImageView) findViewById(R.id.editEmail);
-        ImageView editPassword = (ImageView) findViewById(R.id.editPassword);
-        ImageView editPhone = (ImageView) findViewById(R.id.editPhone);
-        ImageView editDateOfBirth = (ImageView) findViewById(R.id.editDateOfBirth);
+        editName = (ImageView) findViewById(R.id.editName);
+        editEmail = (ImageView) findViewById(R.id.editEmail);
+        editPassword = (ImageView) findViewById(R.id.editPassword);
+        editPhone = (ImageView) findViewById(R.id.editPhone);
+        editDateOfBirth = (ImageView) findViewById(R.id.editDateOfBirth);
 
-        ImageView saveName = (ImageView) findViewById(R.id.saveName);
-        ImageView saveEmail = (ImageView) findViewById(R.id.saveEmail);
-        ImageView savePassword = (ImageView) findViewById(R.id.savePassword);
-        ImageView savePhone = (ImageView) findViewById(R.id.savePhone);
-        ImageView saveDateOfBirth = (ImageView) findViewById(R.id.saveDateOfBirth);
+        saveName = (ImageView) findViewById(R.id.saveName);
+        saveEmail = (ImageView) findViewById(R.id.saveEmail);
+        savePassword = (ImageView) findViewById(R.id.savePassword);
+        savePhone = (ImageView) findViewById(R.id.savePhone);
+        saveDateOfBirth = (ImageView) findViewById(R.id.saveDateOfBirth);
 
-        TextView userName = (TextView) findViewById(R.id.userName);
-        TextView emailText = (TextView) findViewById(R.id.emailText);
-        TextView passwordText = (TextView) findViewById(R.id.passwordText);
-        TextView phoneText = (TextView) findViewById(R.id.phoneText);
-        TextView dateOfBirthText = (TextView) findViewById(R.id.dateOfBirthText);
+        userName = (TextView) findViewById(R.id.userName);
+        emailText = (TextView) findViewById(R.id.emailText);
+        passwordText = (TextView) findViewById(R.id.passwordText);
+        phoneText = (TextView) findViewById(R.id.phoneText);
+        dateOfBirthText = (TextView) findViewById(R.id.dateOfBirthText);
 
-        EditText editUserNameText = (EditText) findViewById(R.id.editUserNameText);
-        EditText editEmailText = (EditText) findViewById(R.id.editEmailText);
-        EditText editPasswordText = (EditText) findViewById(R.id.editPasswordText);
-        EditText editPhoneText = (EditText) findViewById(R.id.editPhoneText);
+        editUserNameText = (EditText) findViewById(R.id.editUserNameText);
+        editEmailText = (EditText) findViewById(R.id.editEmailText);
+        editPasswordText = (EditText) findViewById(R.id.editPasswordText);
+        editPhoneText = (EditText) findViewById(R.id.editPhoneText);
 
-        Spinner day_spinner = findViewById(R.id.day_spinner);
-        Spinner month_spinner = findViewById(R.id.month_spinner);
-        Spinner year_spinner = findViewById(R.id.year_spinner);
+        day_spinner = findViewById(R.id.day_spinner);
+        month_spinner = findViewById(R.id.month_spinner);
+        year_spinner = findViewById(R.id.year_spinner);
 
-        LinearLayout editEmailLayout = (LinearLayout) findViewById(R.id.editEmailLayout);
-        LinearLayout editPasswordLayout = (LinearLayout) findViewById(R.id.editPasswordLayout);
-        LinearLayout editPhoneLayout = (LinearLayout) findViewById(R.id.editPhoneLayout);
-        LinearLayout editDateOfBirthLayout = (LinearLayout) findViewById(R.id.editDateOfBirthLayout);
+        editEmailLayout = (LinearLayout) findViewById(R.id.editEmailLayout);
+        editPasswordLayout = (LinearLayout) findViewById(R.id.editPasswordLayout);
+        editPhoneLayout = (LinearLayout) findViewById(R.id.editPhoneLayout);
+        editDateOfBirthLayout = (LinearLayout) findViewById(R.id.editDateOfBirthLayout);
+
+
+        String url = Constants.URL_GET_USER + email;
+        RequestQueue requestQueue = Volley.newRequestQueue(User_Profile.this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                userName.setText(jsonObject.getString("username"));
+                                emailText.setText(jsonObject.getString("email"));
+                                passwordText.setText(jsonObject.getString("password"));
+                                phoneText.setText(jsonObject.getString("phone"));
+                                dateOfBirthText.setText(jsonObject.getString("dateofbirth"));
+                                navUserName.setText(jsonObject.getString("username"));
+                            }catch(JSONException exception){
+                                Log.d("Error", exception.toString());
+                            }
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(User_Profile.this, error.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.d("Error_json", error.toString());
+                    }
+        });
+        requestQueue.add(jsonArrayRequest);
 
         editName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +230,24 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
                 String name = editUserNameText.getText().toString();
                 editUserNameText.setVisibility(View.GONE);
                 saveName.setVisibility(View.GONE);
-                userName.setText(name);
+
+                sendRequest(name, emailText.getText().toString(), emailText.getText().toString()
+                        , phoneText.getText().toString(), dateOfBirthText.getText().toString()
+                        , passwordText.getText().toString(), new UpdateUserCallback() {
+                            @Override
+                            public void onUpdateSuccess(String message) {
+                                userName.setText(name);
+                                TextView navUserName = headerView.findViewById(R.id.userName);
+                                navUserName.setText(name);
+                                editor.putString(USERNAME, name);
+                            }
+
+                            @Override
+                            public void onUpdateError(String errorMessage) {
+
+                            }
+                        });
+
                 userName.setVisibility(View.VISIBLE);
                 editName.setVisibility(View.VISIBLE);
             }
@@ -140,9 +266,24 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
         saveEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editEmailText.getText().toString();
+                String mail = editEmailText.getText().toString();
                 editEmailLayout.setVisibility(View.GONE);
-                emailText.setText(email);
+                sendRequest(userName.getText().toString(),emailText.getText().toString(),mail
+                        ,phoneText.getText().toString(),dateOfBirthText.getText().toString()
+                        ,passwordText.getText().toString(), new UpdateUserCallback() {
+                            @Override
+                            public void onUpdateSuccess(String message) {
+                                emailText.setText(mail);
+                                email = mail;
+                                editor.putString(EMAIL, mail);
+                            }
+
+                            @Override
+                            public void onUpdateError(String errorMessage) {
+
+                            }
+                        });
+
                 emailText.setVisibility(View.VISIBLE);
             }
         });
@@ -162,7 +303,22 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 String password = editPasswordText.getText().toString();
                 editPasswordLayout.setVisibility(View.GONE);
-                passwordText.setText(password);
+
+                sendRequest(userName.getText().toString(),emailText.getText().toString()
+                        ,emailText.getText().toString(),phoneText.getText().toString()
+                        ,dateOfBirthText.getText().toString(),password, new UpdateUserCallback() {
+                            @Override
+                            public void onUpdateSuccess(String message) {
+                                passwordText.setText(password);
+                                editor.putString(PASS, password);
+                            }
+
+                            @Override
+                            public void onUpdateError(String errorMessage) {
+
+                            }
+                        });
+
                 passwordText.setVisibility(View.VISIBLE);
             }
         });
@@ -182,7 +338,21 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 String phone = editPhoneText.getText().toString();
                 editPhoneLayout.setVisibility(View.GONE);
-                phoneText.setText(phone);
+                sendRequest(userName.getText().toString(),emailText.getText().toString()
+                        ,emailText.getText().toString(),phone
+                        ,dateOfBirthText.getText().toString(),passwordText.getText().toString(), new UpdateUserCallback() {
+                            @Override
+                            public void onUpdateSuccess(String message) {
+                                phoneText.setText(phone);
+                                editor.putString(PHONE, phone);
+                            }
+
+                            @Override
+                            public void onUpdateError(String errorMessage) {
+
+                            }
+                        });
+
                 phoneText.setVisibility(View.VISIBLE);
             }
         });
@@ -211,8 +381,22 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
                 String yearOfBirth = year_spinner.getSelectedItem().toString();
                 String dateOfBirth = dayOfBirth+"/"+monthOfBirth+"/"+yearOfBirth;
                 editDateOfBirthLayout.setVisibility(View.GONE);
+                dateOfBirthText.setVisibility(View.VISIBLE);
+                sendRequest(userName.getText().toString(),emailText.getText().toString()
+                        ,emailText.getText().toString(),phoneText.getText().toString()
+                        ,dateOfBirth,passwordText.getText().toString(), new UpdateUserCallback() {
+                            @Override
+                            public void onUpdateSuccess(String message) {
+                                dateOfBirthText.setText(dateOfBirth);
+                                editor.putString(DATEOFBIRTH, dateOfBirth);
+                            }
 
-                dateOfBirthText.setText(dateOfBirth);
+                            @Override
+                            public void onUpdateError(String errorMessage) {
+
+                            }
+                        });
+
                 dateOfBirthText.setVisibility(View.VISIBLE);
             }
         });
@@ -248,6 +432,66 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
                 android.R.layout.simple_spinner_dropdown_item, years);
 
         year_spinner.setAdapter(yearAdapter);
+
+    }
+
+    private void setupSharedPrefs() {
+        prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+    }
+
+
+
+    void sendRequest(String name, String oldEmail, String newEmail, String phone, String dateBirth, String pass, UpdateUserCallback callback){
+        RequestQueue requestQueue = Volley.newRequestQueue(User_Profile.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT,
+                Constants.URL_UPDATE_USER,
+                response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (!jsonObject.getBoolean("error")){
+                            callback.onUpdateSuccess(jsonObject.getString("message"));
+                        }else{
+                            callback.onUpdateError(jsonObject.getString("message"));
+                        }
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    System.out.println(error.getMessage());
+
+                }) {
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("username", name);
+                    jsonBody.put("oldEmail", oldEmail);
+                    jsonBody.put("newEmail", newEmail);
+                    jsonBody.put("phone", phone);
+                    jsonBody.put("dateofbirth", dateBirth);
+                    jsonBody.put("password", pass);
+                    // Add more user information if needed
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return jsonBody.toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=UTF-8";
+            }
+
+        };
+
+        requestQueue.add(stringRequest);
 
     }
 
@@ -300,6 +544,8 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 Toast.makeText(this, "home!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, HotelProfile.class);
+                intent.putExtra("email", email);
+                intent.putExtra("username",userName.getText().toString() );
                 startActivity(intent);
                 finish();
                 break;
@@ -364,6 +610,8 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_about:
                 Toast.makeText(this, "about!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, AdsActivity.class);
+                intent.putExtra("email", email);
+                intent.putExtra("username",userName.getText().toString() );
                 startActivity(intent);
                 finish();
                 break;
@@ -371,6 +619,8 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_account:
                 Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, User_Profile.class);
+                intent.putExtra("email", email);
+                intent.putExtra("username",userName.getText().toString() );
                 startActivity(intent);
                 finish();
                 break;
@@ -378,6 +628,8 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_booking:
                 Toast.makeText(this, "booking!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, UserBookingActivity.class);
+                intent.putExtra("email", email);
+                intent.putExtra("username",userName.getText().toString() );
                 startActivity(intent);
                 finish();
                 break;
@@ -385,6 +637,8 @@ public class User_Profile extends AppCompatActivity implements NavigationView.On
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(User_Profile.this, LoginActivity.class);
+                intent.putExtra("email", email);
+                intent.putExtra("username",userName.getText().toString() );
                 startActivity(intent);
                 finish();
                 break;
