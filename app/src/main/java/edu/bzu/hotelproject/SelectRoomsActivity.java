@@ -35,6 +35,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
@@ -98,27 +99,55 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
 //        _______________________________________________________________________________________________________
 
         List<Room> itemList = new ArrayList<>();
+        myRecyclerView = findViewById(R.id.myRecyclerView);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        UpdateUserCallback callback = new UpdateUserCallback() {
+            @Override
+            public void onUpdateSuccess(String message) {
+
+
+                Room room1 = new Room("room name for test",315,2,518.0,2);
+                itemList.add(room1);
+
+                // Check if itemList is not null
+                if (itemList != null) {
+                    Toast.makeText(SelectRoomsActivity.this, "Data retrieved successfully", Toast.LENGTH_SHORT).show();
+                    RoomAdapter adapter = new RoomAdapter(SelectRoomsActivity.this, itemList);
+                    myRecyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(SelectRoomsActivity.this, "No rooms available", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onUpdateError(String errorMessage) {
+
+            }
+        };
+
+
         String url = Constants.URL_GET_ROOMS;
         RequestQueue requestQueue = Volley.newRequestQueue(SelectRoomsActivity.this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url, null,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
-                            JSONObject jsonObject = response.getJSONObject(0);
-                            JSONArray roomsArray = jsonObject.getJSONArray("rooms");
+                            //JSONObject jsonObject = response.getJSONObject(0);
+                            JSONArray roomsArray = response.getJSONArray("rooms");
                             for (int i = 0; i < roomsArray.length(); i++) {
                                 JSONObject roomObject = roomsArray.getJSONObject(i);
                                 String name = roomObject.getString("roomName");
                                 int size = roomObject.getInt("size");
-                                boolean booked = roomObject.getInt("isBooked") == 1;
+                                //boolean booked = roomObject.getInt("isBooked") == 1;
                                 int floor = roomObject.getInt("floorNum");
                                 double price = roomObject.getDouble("price");
                                 int bed = roomObject.getInt("bedNum");
                                 Room room = new Room(name, size, floor, price, bed);
                                 itemList.add(room);
                             }
+                            callback.onUpdateSuccess(response.getString("message"));
 
                         } catch (JSONException e) {
                             Log.d("Error", e.toString());
@@ -134,26 +163,13 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
                     }
                 });
 
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonObjectRequest);
 
 
 
 //        _______________________________________________________________________________________________________
 
-        myRecyclerView = findViewById(R.id.myRecyclerView);
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Room room1 = new Room("room name for test",315,2,518.0,2);
-        itemList.add(room1);
-
-        // Check if itemList is not null
-        if (itemList != null) {
-            Toast.makeText(this, "Data retrieved successfully", Toast.LENGTH_SHORT).show();
-            RoomAdapter adapter = new RoomAdapter(this, itemList);
-            myRecyclerView.setAdapter(adapter);
-        } else {
-            Toast.makeText(this, "No rooms available", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void showGallery(View view) {

@@ -161,15 +161,15 @@ tools:openDrawer="start">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<com.google.android.material.navigation.NavigationView
-    android:id="@+id/nav_view"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:visibility="visible"
-    app:headerLayout="@layout/nav_header"
-    app:itemIconTint="@color/orange_color_2"
-    app:itemTextColor="@color/orange_color_2"
-    app:menu="@menu/nav_menu" />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="visible"
+        app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/orange_color_2"
+        app:itemTextColor="@color/orange_color_2"
+        app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
