@@ -24,10 +24,18 @@ public class FillInfoActivity extends AppCompatActivity {
 
     private Button next, cancel;
     private  ImageView back;
+
+    Intent intent;
+    String username;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_info);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         next = (Button) findViewById(R.id.next);
         cancel = (Button) findViewById(R.id.cancel);
@@ -37,7 +45,11 @@ public class FillInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                Intent intent = new Intent(FillInfoActivity.this, PaymentActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
+                startActivity(intent);
+                finish();
 
             }
         });
@@ -45,6 +57,8 @@ public class FillInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FillInfoActivity.this, SelectRoomsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }
@@ -53,6 +67,8 @@ public class FillInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FillInfoActivity.this, SelectRoomsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }

@@ -16,10 +16,18 @@ public class PaymentActivity extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private Button next, cancel, checkDatePickerButton;
+
+    Intent intent;
+    String username;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         next = (Button) findViewById(R.id.next);
         cancel = (Button) findViewById(R.id.cancel);
@@ -28,6 +36,8 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentActivity.this, BookingOverviewActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }
@@ -36,6 +46,8 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentActivity.this, FillInfoActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }

@@ -26,11 +26,18 @@ import com.google.android.material.navigation.NavigationView;
 
 public class AdsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
+    Intent intent;
+    String username;
+    String email;
     private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +82,8 @@ public class AdsActivity extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_home:
                 Toast.makeText(this, "home!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(AdsActivity.this, HotelProfile.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -139,6 +148,8 @@ public class AdsActivity extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_about:
                 Toast.makeText(this, "about!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(AdsActivity.this, AdsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -146,6 +157,8 @@ public class AdsActivity extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_account:
                 Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(AdsActivity.this, User_Profile.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -153,6 +166,8 @@ public class AdsActivity extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(AdsActivity.this, LoginActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;

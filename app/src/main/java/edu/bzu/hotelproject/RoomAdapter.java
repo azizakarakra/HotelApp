@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,9 @@ import java.util.List;
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder>{
     private Context context;
     private List<Room> items;
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     public RoomAdapter(Context context, List<Room> items){
         this.context = context;
@@ -37,6 +42,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder>{
         final Room item = items.get(position);
         CardView myCardView = holder.cardView;
 
+        prefs= PreferenceManager.getDefaultSharedPreferences(context);
+        editor = prefs.edit();
+
         TextView name = (TextView) myCardView.findViewById(R.id.CardRoomName);
         TextView floor = (TextView) myCardView.findViewById(R.id.CardRoomFloor);
         TextView bed = (TextView) myCardView.findViewById(R.id.CardRoomBed);
@@ -52,6 +60,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder>{
         room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putInt("selectedRoomID", item.getRoomID());
+                editor.putString("selectedRoom", item.getRoomName());
+                editor.putFloat("selectedRoomPrice",(float) item.getPrice());
                 Intent intent = new Intent(context, FillInfoActivity.class);
                 context.startActivity(intent);
                 ((Activity) context).finish();

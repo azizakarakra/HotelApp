@@ -57,14 +57,20 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
     private SharedPreferences.Editor editor;
 
     Intent intent;
+    String username;
+    String email;
+    String start;
+    String end;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_rooms);
 
         intent = getIntent();
-        String start = intent.getStringExtra("startDate");
-        String end = intent.getStringExtra("endDate");
+        start = intent.getStringExtra("startDate");
+        end = intent.getStringExtra("endDate");
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,7 +112,7 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
             public void onUpdateSuccess(String message) {
 
 
-                Room room1 = new Room("room name for test",315,2,518.0,2);
+                Room room1 = new Room(0,"room name for test",315,2,518.0,2);
                 itemList.add(room1);
 
                 // Check if itemList is not null
@@ -138,13 +144,14 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
                             JSONArray roomsArray = response.getJSONArray("rooms");
                             for (int i = 0; i < roomsArray.length(); i++) {
                                 JSONObject roomObject = roomsArray.getJSONObject(i);
+                                int roomID = roomObject.getInt("id");
                                 String name = roomObject.getString("roomName");
                                 int size = roomObject.getInt("size");
                                 //boolean booked = roomObject.getInt("isBooked") == 1;
                                 int floor = roomObject.getInt("floorNum");
                                 double price = roomObject.getDouble("price");
                                 int bed = roomObject.getInt("bedNum");
-                                Room room = new Room(name, size, floor, price, bed);
+                                Room room = new Room(roomID,name, size, floor, price, bed);
                                 itemList.add(room);
                             }
                             callback.onUpdateSuccess(response.getString("message"));
@@ -174,6 +181,10 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
 
     public void showGallery(View view) {
         Intent intent = new Intent(SelectRoomsActivity.this, GalleryActivity.class);
+        intent.putExtra("startDate",start);
+        intent.putExtra("endDate",end);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
         startActivity(intent);
         finish();
     }
@@ -190,6 +201,8 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
             case R.id.nav_home:
                 Toast.makeText(this, "home!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(SelectRoomsActivity.this, HotelProfile.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -254,6 +267,8 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
             case R.id.nav_about:
                 Toast.makeText(this, "about!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(SelectRoomsActivity.this, AdsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -261,6 +276,8 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
             case R.id.nav_account:
                 Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(SelectRoomsActivity.this, User_Profile.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;
@@ -268,6 +285,8 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
                 intent = new Intent(SelectRoomsActivity.this, LoginActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
                 break;

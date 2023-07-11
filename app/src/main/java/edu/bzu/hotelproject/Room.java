@@ -2,6 +2,7 @@ package edu.bzu.hotelproject;
 
 public class Room {
 
+    private int roomID;
     private String roomName;
     private int roomSize;
     private boolean isBooked;
@@ -9,13 +10,23 @@ public class Room {
     private double roomPrice;
     private int numberOfBeds;
 
-    public Room(String roomName, int size, int floorNumber, double price, int numberOfBeds) {
+    public Room(int roomID, String roomName, int size, int floorNumber, double price, int numberOfBeds) {
+        this.roomID = roomID;
         this.roomName = roomName;
         this.roomSize = size;
         this.floorNumber = floorNumber;
         this.roomPrice = price;
         this.numberOfBeds = numberOfBeds;
         this.isBooked = false;
+
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
 
     public String getRoomName() {

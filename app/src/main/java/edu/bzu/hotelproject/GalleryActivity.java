@@ -25,20 +25,31 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+
 public class GalleryActivity extends AppCompatActivity  {
 
     private ImageView back;
     private DrawerLayout drawerLayout;
+
+    Intent intent;
+    String username;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
+        intent = getIntent();
+        username = intent.getStringExtra("username");
+        email = intent.getStringExtra("email");
 
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GalleryActivity.this, SelectRoomsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }

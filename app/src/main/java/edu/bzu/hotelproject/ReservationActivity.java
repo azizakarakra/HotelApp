@@ -12,7 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -43,10 +45,16 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
     String username;
     String email;
 
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
 
         intent = getIntent();
         username = intent.getStringExtra("username");
@@ -99,12 +107,14 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View view) {
                 openStartDatePicker(view);
+                editor.putString("startDate", checkInDatePickerButton.getText().toString());
             }
         });
         checkOutDatePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openEndDatePicker(view);
+                editor.putString("endDate", checkOutDatePickerButton.getText().toString());
             }
         });
 
@@ -253,6 +263,8 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
                 Intent intent = new Intent(ReservationActivity.this, SelectRoomsActivity.class);
                 intent.putExtra("startDate",checkInDatePickerButton.getText());
                 intent.putExtra("endDate",checkOutDatePickerButton.getText());
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }
@@ -279,6 +291,7 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
                 String newDate = makeDateString(day, month, year);
+
                 checkInDatePickerButton.setText(newDate);
             }
         };
@@ -297,6 +310,7 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
                 String newDate = makeDateString(day, month, year);
+
                 checkOutDatePickerButton.setText(newDate);
             }
         };
