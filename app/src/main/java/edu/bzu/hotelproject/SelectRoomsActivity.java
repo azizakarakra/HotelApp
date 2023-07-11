@@ -7,9 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,20 +24,46 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectRoomsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private DrawerLayout drawerLayout;
-    private Button room1;
+    ProgressBar progressBar;
+    private RecyclerView myRecyclerView;
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_rooms);
+
+        intent = getIntent();
+        String start = intent.getStringExtra("startDate");
+        String end = intent.getStringExtra("endDate");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,15 +95,65 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        room1 = (Button) findViewById(R.id.room1);
-        room1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectRoomsActivity.this, FillInfoActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        _______________________________________________________________________________________________________
+
+        List<Room> itemList = new ArrayList<>();
+        String url = Constants.URL_GET_ROOMS;
+        RequestQueue requestQueue = Volley.newRequestQueue(SelectRoomsActivity.this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(0);
+                            JSONArray roomsArray = jsonObject.getJSONArray("rooms");
+                            for (int i = 0; i < roomsArray.length(); i++) {
+                                JSONObject roomObject = roomsArray.getJSONObject(i);
+                                String name = roomObject.getString("roomName");
+                                int size = roomObject.getInt("size");
+                                boolean booked = roomObject.getInt("isBooked") == 1;
+                                int floor = roomObject.getInt("floorNum");
+                                double price = roomObject.getDouble("price");
+                                int bed = roomObject.getInt("bedNum");
+                                Room room = new Room(name, size, floor, price, bed);
+                                itemList.add(room);
+                            }
+
+                        } catch (JSONException e) {
+                            Log.d("Error", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SelectRoomsActivity.this, error.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.d("Error_json", error.toString());
+                    }
+                });
+
+        requestQueue.add(jsonArrayRequest);
+
+
+
+//        _______________________________________________________________________________________________________
+
+        myRecyclerView = findViewById(R.id.myRecyclerView);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Room room1 = new Room("room name for test",315,2,518.0,2);
+        itemList.add(room1);
+
+        // Check if itemList is not null
+        if (itemList != null) {
+            Toast.makeText(this, "Data retrieved successfully", Toast.LENGTH_SHORT).show();
+            RoomAdapter adapter = new RoomAdapter(this, itemList);
+            myRecyclerView.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, "No rooms available", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void showGallery(View view) {
