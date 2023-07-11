@@ -73,6 +73,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
                             @Override
                             public void onResponse(JSONArray response) {
                                 Toast.makeText(context, "Canceled",Toast.LENGTH_SHORT).show();
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -99,11 +100,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
                 Dialog myDialog = new Dialog(context);
                 myDialog.setContentView(R.layout.booking_dialog_card);
 
-                TextView name = (TextView) myCardView.findViewById(R.id.CardRoomName);
-                TextView floor = (TextView) myCardView.findViewById(R.id.CardRoomFloor);
-                TextView bed = (TextView) myCardView.findViewById(R.id.CardRoomBed);
-                TextView size = (TextView) myCardView.findViewById(R.id.CardRoomSize);
-                TextView price = (TextView) myCardView.findViewById(R.id.CardRoomPrice);
+                TextView name = (TextView) myDialog.findViewById(R.id.CardRoomName);
+                TextView floor = (TextView) myDialog.findViewById(R.id.CardRoomFloor);
+                TextView bed = (TextView) myDialog.findViewById(R.id.CardRoomBed);
+                TextView size = (TextView) myDialog.findViewById(R.id.CardRoomSize);
+                TextView price = (TextView) myDialog.findViewById(R.id.CardRoomPrice);
 
                 String url = Constants.URL_GET_ROOM + id;
                 RequestQueue requestQueue = Volley.newRequestQueue(context);

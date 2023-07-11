@@ -179,6 +179,14 @@ public class HotelProfile extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.nav_booking:
+                Toast.makeText(this, "booking!", Toast.LENGTH_SHORT).show();
+                intent = new Intent(HotelProfile.this, UserBookingActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
+                startActivity(intent);
+                finish();
+                break;
 
             case R.id.nav_account:
                 Toast.makeText(this, "account!", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,8 @@ public class Constants {
     public static final String URL_GET_ROOMS = ROOT_URL+"getRooms.php";
     public static final String URL_GET_ROOM = ROOT_URL+"getRoom.php?id=";
     public static final String URL_DELETE_RESERVATION = ROOT_URL+"deleteReservation.php?id=";
+    public static final String URL_GET_RESERVATION = ROOT_URL+"getReservation.php?email=";
+
 
     public static final String URL_BOOKING = ROOT_URL+"registerRooms.php";
 
