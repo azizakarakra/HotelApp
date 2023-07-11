@@ -6,7 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class FillInfoActivity extends AppCompatActivity {
 
@@ -20,12 +32,13 @@ public class FillInfoActivity extends AppCompatActivity {
         next = (Button) findViewById(R.id.next);
         cancel = (Button) findViewById(R.id.cancel);
         back = (ImageView) findViewById(R.id.back);
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FillInfoActivity.this, PaymentActivity.class);
-                startActivity(intent);
-                finish();
+
+
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {

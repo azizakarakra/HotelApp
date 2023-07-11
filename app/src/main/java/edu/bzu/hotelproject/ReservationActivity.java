@@ -251,6 +251,8 @@ public class ReservationActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ReservationActivity.this, SelectRoomsActivity.class);
+                intent.putExtra("startDate",checkInDatePickerButton.getText());
+                intent.putExtra("endDate",checkOutDatePickerButton.getText());
                 startActivity(intent);
                 finish();
             }

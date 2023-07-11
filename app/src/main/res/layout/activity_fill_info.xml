@@ -126,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="First Name"
+        android:text="User Name"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
         app:layout_constraintStart_toStartOf="@+id/guideline31" />
 
@@ -161,45 +161,6 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/checktrue" />
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/lastnameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Last Name"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-        app:layout_constraintStart_toStartOf="@+id/guideline31" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:background="@drawable/input_box"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline34"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintStart_toStartOf="@+id/guideline31">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:ems="9"
-            android:inputType="textPersonName"
-            android:paddingHorizontal="5dp"
-            android:text="Assi"
-            android:textColor="@color/border_color_2"/>
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/checktrue" />
     </LinearLayout>
 
     <TextView

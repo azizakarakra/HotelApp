@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -50,10 +52,18 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
     ProgressBar progressBar;
     private RecyclerView myRecyclerView;
 
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_rooms);
+
+        intent = getIntent();
+        String start = intent.getStringExtra("startDate");
+        String end = intent.getStringExtra("endDate");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,26 +101,28 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
         String url = Constants.URL_GET_ROOMS;
         RequestQueue requestQueue = Volley.newRequestQueue(SelectRoomsActivity.this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                url,null,
+                url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                String name = jsonObject.getString("roomName");
-                                int size = jsonObject.getInt("size");
-                                boolean booked = jsonObject.getBoolean("isBooked");
-                                int floor = jsonObject.getInt("floorNum");
-                                double price = jsonObject.getDouble("price");
-                                int bed = jsonObject.getInt("bedNum");
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(0);
+                            JSONArray roomsArray = jsonObject.getJSONArray("rooms");
+                            for (int i = 0; i < roomsArray.length(); i++) {
+                                JSONObject roomObject = roomsArray.getJSONObject(i);
+                                String name = roomObject.getString("roomName");
+                                int size = roomObject.getInt("size");
+                                boolean booked = roomObject.getInt("isBooked") == 1;
+                                int floor = roomObject.getInt("floorNum");
+                                double price = roomObject.getDouble("price");
+                                int bed = roomObject.getInt("bedNum");
                                 Room room = new Room(name, size, floor, price, bed);
                                 itemList.add(room);
-                            }catch(JSONException exception){
-                                Log.d("Error", exception.toString());
                             }
-                        }
 
+                        } catch (JSONException e) {
+                            Log.d("Error", e.toString());
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -121,7 +133,10 @@ public class SelectRoomsActivity extends AppCompatActivity implements Navigation
                         Log.d("Error_json", error.toString());
                     }
                 });
+
         requestQueue.add(jsonArrayRequest);
+
+
 
 //        _______________________________________________________________________________________________________
 
