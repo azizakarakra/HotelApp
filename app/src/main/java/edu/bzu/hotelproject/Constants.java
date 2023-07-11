@@ -1,8 +1,9 @@
 package edu.bzu.hotelproject;
 
+
 public class Constants {
 
-    private static final String ROOT_URL = "http://192.168.56.1/hotel/v1/"; // Huthayfa IP:192.168.56.1
+    private static final String ROOT_URL = "http://192.168.56.1/Hotel/v1/"; // Huthayfa IP:192.168.56.1
 
     public static final String URL_REGISTER = ROOT_URL+"registerUser.php";
     public static final String URL_LOGIN = ROOT_URL+"userLogin.php";

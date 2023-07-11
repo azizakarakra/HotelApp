@@ -69,18 +69,24 @@ public class SignupActivity extends AppCompatActivity {
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
-                                editor.putString(EMAIL, email.getText().toString());
-                                editor.putString(PASS, password.getText().toString());
-                                editor.putString(USERNAME, userName.getText().toString());
-                                editor.putString(PHONE, phone.getText().toString());
-                                editor.putString(DATEOFBIRTH, dateOfBirth.getText().toString());
-                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.GONE);
-                                Intent intent = new Intent(SignupActivity.this, HotelProfile.class);
-                                intent.putExtra("email", email.getText().toString());
-                                intent.putExtra("username", userName.getText().toString());
-                                startActivity(intent);
-                                finish();
+                                if(!jsonObject.getBoolean("error")){
+                                    editor.putString(EMAIL, email.getText().toString());
+                                    editor.putString(PASS, password.getText().toString());
+                                    editor.putString(USERNAME, userName.getText().toString());
+                                    editor.putString(PHONE, phone.getText().toString());
+                                    editor.putString(DATEOFBIRTH, dateOfBirth.getText().toString());
+                                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent intent = new Intent(SignupActivity.this, HotelProfile.class);
+                                    intent.putExtra("email", email.getText().toString());
+                                    intent.putExtra("username", userName.getText().toString());
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
+                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
